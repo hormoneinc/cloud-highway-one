@@ -10,7 +10,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
   sslEnabled: true
 });
 
-module.exports = () => {
+module.exports.ping = () => {
   const providers = Object.keys(regions);
 
   providers.forEach((provider) => {
