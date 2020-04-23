@@ -18,9 +18,117 @@ jobs:
       - name: Install AWS Project Dependencies
         working-directory: ./cloud-highway-one-aws
         run: yarn install
+      - name: Deploy to AWS us-east-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region us-east-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS us-east-2
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region us-east-2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS us-west-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region us-west-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Deploy to AWS us-west-2
         working-directory: ./cloud-highway-one-aws
         run: serverless deploy --region us-west-2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS af-south-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region af-south-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-east-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-east-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-south-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-south-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-northeast-2
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-northeast-2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-southeast-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-southeast-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-southeast-2
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-southeast-2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ap-northeast-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ap-northeast-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS ca-central-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region ca-central-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS eu-central-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region eu-central-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS eu-west-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region eu-west-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS eu-west-2
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region eu-west-2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS eu-west-3
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region eu-west-3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS eu-north-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region eu-north-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS me-south-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region me-south-1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS sa-east-1
+        working-directory: ./cloud-highway-one-aws
+        run: serverless deploy --region sa-east-1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
