@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   push:
-    branches: [deploy]
+    branches: [deploy/ping]
 
 jobs:
   deploy:

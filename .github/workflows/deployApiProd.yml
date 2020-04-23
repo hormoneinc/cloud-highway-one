@@ -2,7 +2,7 @@ name: API Deployment (PROD)
 
 on:
   push:
-    branches: [deployAPI/prod]
+    branches: [deploy/api/prod]
 
 jobs:
   deploy:
