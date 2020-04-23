@@ -4,8 +4,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: ${opt:region}
-  logs:
-    restApi: true
   iamRoleStatements:
     - Effect: Allow
       Action:
