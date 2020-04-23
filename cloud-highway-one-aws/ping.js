@@ -17,7 +17,7 @@ module.exports.ping = () => {
     regions[provider].forEach((region) => {
       let host;
       if (provider === 'aws') {
-        host = `s3.${region}.amazonaws.com`;
+        host = `ec2.${region}.amazonaws.com`;
       }
       tcpp.ping({ address: host, attempts: 5 }, (err, data) => {
         if (err) {
