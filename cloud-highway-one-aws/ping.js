@@ -19,22 +19,26 @@ module.exports.ping = () => {
       if (provider === 'aws') {
         host = `s3.${region}.amazonaws.com`;
       }
-      tcpp.ping({ address: host, attempts: 5 }, ({ avg }) => {
-        const params = {
-          TableName: 'CloudHighwayOne',
-          Key: {
-            srcRegion: `aws@${currentRegion}`,
-            dstRegion: `${provider}@${region}`
-          },
-          ExpressionAttributeNames: {
-            '#ping': 'ping'
-          },
-          ExpressionAttributeValues: {
-            ':value': avg
-          },
-          UpdateExpression: 'SET #ping = :value'
-        };
-        docClient.update(params).promise();
+      tcpp.ping({ address: host, attempts: 5 }, (err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const params = {
+            TableName: 'CloudHighwayOne',
+            Key: {
+              srcRegion: `aws@${currentRegion}`,
+              dstRegion: `${provider}@${region}`
+            },
+            ExpressionAttributeNames: {
+              '#ping': 'ping'
+            },
+            ExpressionAttributeValues: {
+              ':value': data.avg
+            },
+            UpdateExpression: 'SET #ping = :value'
+          };
+          docClient.update(params).promise();
+        }
       });
     });
   });
