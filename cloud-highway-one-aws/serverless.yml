@@ -21,4 +21,6 @@ provider:
 
 functions:
   PingAllRegions:
-    handler: ping.ping
+    handler: ping
+    events:
+      - schedule: rate(10 minutes)
