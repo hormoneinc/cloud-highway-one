@@ -22,3 +22,10 @@ functions:
       - http:
           path: getLatency
           method: get
+          statusCodes:
+            200:
+              pattern: ''
+            400:
+              pattern: '.*"statusCode":400,.*'
+            500:
+              pattern: '.*"statusCode":500,.*'
