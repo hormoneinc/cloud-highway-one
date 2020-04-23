@@ -1,0 +1,24 @@
+service: cloud-highway-one-aws
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${opt:region}
+  logs:
+    restApi: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:BatchGetItem
+      Resource: 'arn:aws:dynamodb:*:*:table/C'
+
+functions:
+  PingAllRegions:
+    handler: ping.ping

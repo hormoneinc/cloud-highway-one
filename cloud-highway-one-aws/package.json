@@ -1,0 +1,21 @@
+{
+  "name": "cloud-highway-one-aws",
+  "version": "1.0.0",
+  "author": "Hormone Inc.",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "aws-sdk": "^2.661.0",
+    "ping": "^0.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "prettier": "^2.0.5"
+  }
+}
