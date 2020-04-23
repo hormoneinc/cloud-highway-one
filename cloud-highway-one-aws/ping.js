@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const ping = require('ping');
+const tcpp = require('tcp-ping');
 const { regions } = require('./constants');
 
 const currentRegion = process.env.AWS_REGION;
@@ -19,29 +19,23 @@ module.exports.ping = () => {
       if (provider === 'aws') {
         host = `s3.${region}.amazonaws.com`;
       }
-      ping.promise
-        .probe(host, {
-          timeout: 5,
-          min_reply: 1,
-          deadline: 5
-        })
-        .then(({ alive, time }) => {
-          const params = {
-            TableName: 'CloudHighwayOne',
-            Key: {
-              srcRegion: `aws@${currentRegion}`,
-              dstRegion: `${provider}@${region}`
-            },
-            ExpressionAttributeNames: {
-              '#ping': 'ping'
-            },
-            ExpressionAttributeValues: {
-              ':value': alive ? time : 'DOWN'
-            },
-            UpdateExpression: 'SET #ping = :value'
-          };
-          docClient.update(params).promise();
-        });
+      tcpp.ping({ address: host, attempts: 5 }, ({ avg }) => {
+        const params = {
+          TableName: 'CloudHighwayOne',
+          Key: {
+            srcRegion: `aws@${currentRegion}`,
+            dstRegion: `${provider}@${region}`
+          },
+          ExpressionAttributeNames: {
+            '#ping': 'ping'
+          },
+          ExpressionAttributeValues: {
+            ':value': avg
+          },
+          UpdateExpression: 'SET #ping = :value'
+        };
+        docClient.update(params).promise();
+      });
     });
   });
 };
