@@ -8,7 +8,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 function checkWhetherValidProvider(provider) {
-  const providers = Object.keys[regions];
+  const providers = Object.keys(regions);
   return providers.includes(provider);
 }
 
