@@ -207,6 +207,7 @@ module.exports.interRegionalLatency = async (event) => {
   try {
     response = await docClient.get(params).promise();
   } catch (error) {
+    console.error(error);
     return {
       statusCode: 500,
       body: 'Internal Server Error'
@@ -314,6 +315,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       try {
         response = await docClient.batchGet(params).promise();
       } catch (error) {
+        console.error(error);
         return {
           statusCode: 500,
           body: 'Internal Server Error'
@@ -390,6 +392,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
           // eslint-disable-next-line no-await-in-loop
           response = await docClient.query(lastEvaluatedKey ? paramsToContinue : params).promise();
         } catch (error) {
+          console.error(error);
           return {
             statusCode: 500,
             body: 'Internal Server Error'
@@ -434,6 +437,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       body: result
     };
   }
+  console.error('no result');
   return {
     statusCode: 500,
     body: 'Internal Server Error'
