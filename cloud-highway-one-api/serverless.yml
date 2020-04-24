@@ -50,3 +50,17 @@ functions:
               pattern: '.*"statusCode":400,.*'
             500:
               pattern: '.*"statusCode":500,.*'
+  GetAllDstRegionFromSrcRegion:
+    handler: api/getAllDstRegion.getAllInterRegionalLatenciesFromSourceRegion
+    timeout: 10
+    events:
+      - http:
+          path: getAllDstRegion
+          method: get
+          statusCodes:
+            200:
+              pattern: ''
+            400:
+              pattern: '.*"statusCode":400,.*'
+            500:
+              pattern: '.*"statusCode":500,.*'
