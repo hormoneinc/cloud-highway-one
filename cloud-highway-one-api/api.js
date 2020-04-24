@@ -152,7 +152,7 @@ function createCacheKey(requestType, original) {
  */
 function generateListOfAllRegionsExceptSelf(region) {
   const providers = Object.keys(regions);
-  let array = [];
+  const array = [];
   providers.forEach((provider) => {
     regions[provider].forEach((x) => {
       const name = `${provider}@${x}`;
