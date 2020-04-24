@@ -26,8 +26,8 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  *
  * {
  *   data: [
- *     { region: 'aws@ap-east-1', ping: 125 },
- *     { region: 'aws@eu-central-1', ping: 200 }
+ *     { dst: 'aws@ap-east-1', ping: 125 },
+ *     { dst: 'aws@eu-central-1', ping: 200 }
  *   ]
  * }
  *
@@ -75,7 +75,7 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
           // filter out source region
           if (arrayOfObjects[i].dstRegion !== srcRegionName) {
             resultArray.push({
-              region: arrayOfObjects[i].dstRegion,
+              dst: arrayOfObjects[i].dstRegion,
               ping: arrayOfObjects[i].ping
             });
           }
@@ -152,7 +152,7 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
           // filter out source region
           if (response.Items[i].dstRegion !== srcRegionName) {
             resultArray.push({
-              region: response.Items[i].dstRegion,
+              dst: response.Items[i].dstRegion,
               ping: response.Items[i].ping
             });
           }
