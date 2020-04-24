@@ -95,7 +95,7 @@ module.exports.checkCacheAsync = async (key) => {
   try {
     response = await docClient.get(params).promise();
   } catch (error) {
-    console.error(error);
+    console.error('logtag: 48abed31-aa56-4cc9-9a97-50ebe7755eff', error);
     return null;
   }
 
@@ -124,7 +124,7 @@ module.exports.writeToCacheAsync = async (key, value) => {
   try {
     await docClient.put(params).promise();
   } catch (error) {
-    console.error(`Writing to cache failed: ${error}`);
+    console.error('logtag: 0258c475-50fa-4654-af2a-ac6e19cf210b', `Writing to cache failed: ${error}`);
   }
 };
 

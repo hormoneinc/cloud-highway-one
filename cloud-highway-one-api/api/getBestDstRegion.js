@@ -60,7 +60,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       try {
         cachedValue = await checkCacheAsync(cacheKey);
       } catch (error) {
-        console.error(error);
+        console.error('logtag: a9a383db-2e1e-49be-ac96-d2ccab3a0072', error);
       }
       if (cachedValue) {
         // expect cache value to be a string in format: "{"dstRegion":"aws@us-west-1","ping":45}|{"dstRegion":"aws@ap-east-1","ping":125}|{"dstRegion":"aws@eu-central-1","ping":200}"
@@ -82,7 +82,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
           console.log('cache hit');
           result = regionOfMinPing;
         } catch (error) {
-          console.error(error);
+          console.error('logtag: 2321e41c-a98e-4bed-838a-6504ebc01996', error);
           result = null;
         }
       } else {
@@ -114,7 +114,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       try {
         response = await docClient.batchGet(params).promise();
       } catch (error) {
-        console.error(error);
+        console.error('logtag: b1870162-b567-49ad-9862-3033b4e0f86e', error);
         return {
           statusCode: 500,
           body: 'Internal Server Error'
@@ -152,7 +152,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
               response.Responses.CloudHighwayOne.map((x) => JSON.stringify(x)).join('|')
             );
           } catch (error) {
-            console.error(error);
+            console.error('logtag: ca877150-9fad-46db-a27e-f637ba18f434', error);
           }
         }
       }
@@ -191,7 +191,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
           // eslint-disable-next-line no-await-in-loop
           response = await docClient.query(lastEvaluatedKey ? paramsToContinue : params).promise();
         } catch (error) {
-          console.error(error);
+          console.error('logtag: 38fcf762-a941-4334-8199-6bbe03f62e05', error);
           return {
             statusCode: 500,
             body: 'Internal Server Error'
@@ -224,7 +224,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         try {
           await writeToCacheAsync(cacheKey, responseItemsArray.map((x) => JSON.stringify(x)).join('|'));
         } catch (error) {
-          console.error(error);
+          console.error('logtag: 3415871b-d434-43e9-89a4-27b6550cfb58', error);
         }
       }
     }
@@ -236,7 +236,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       body: result
     };
   }
-  console.error('no result');
+  console.error('logtag: 3312da6e-262f-4e8a-8562-bedfc7332dce', 'no result');
   return {
     statusCode: 500,
     body: 'Internal Server Error'

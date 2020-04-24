@@ -48,7 +48,7 @@ module.exports.interRegionalLatency = async (event) => {
   try {
     response = await docClient.get(params).promise();
   } catch (error) {
-    console.error(error);
+    console.error('logtag: b6a94240-902b-42e8-af04-66225f473742', error);
     return {
       statusCode: 500,
       body: 'Internal Server Error'
