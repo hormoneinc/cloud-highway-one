@@ -261,7 +261,11 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
     });
 
     if (cacheKey) {
-      cachedValue = await checkCacheAsync(cacheKey);
+      try {
+        cachedValue = await checkCacheAsync(cacheKey);
+      } catch (error) {
+        console.error(error);
+      }
       if (cachedValue) {
         // expect cache value to be a string in format: "{"dstRegion":"aws@us-west-1","ping":45}|{"dstRegion":"aws@ap-east-1","ping":125}|{"dstRegion":"aws@eu-central-1","ping":200}"
         try {
