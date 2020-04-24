@@ -17,6 +17,7 @@ provider:
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
+        - dynamodb:PutItem
         - dynamodb:BatchGetItem
       Resource: 'arn:aws:dynamodb:us-west-2:*:table/CloudHighwayOneCache'
 
