@@ -61,6 +61,7 @@ module.exports.getAllData = async (event) => {
     console.error('logtag: dcb32b99-4a17-4778-8e4a-cd5689971926', error);
   }
   if (cachedValue) {
+    console.log('logtag: 1d0f40fd-30fe-4f91-b4f1-1f944723440f', 'cache hit');
     return {
       statusCode: 200,
       body: cachedValue
