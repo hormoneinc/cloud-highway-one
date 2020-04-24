@@ -15,7 +15,7 @@ jobs:
           node-version: "12.x"
       - name: Install Serverless Framework
         run: npm install -g serverless
-      - name: Install AWS Project Dependencies
+      - name: Install Dependencies
         working-directory: ./cloud-highway-one-api
         run: yarn install
       - name: Deploy to AWS us-west-2
