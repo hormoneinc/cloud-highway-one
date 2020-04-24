@@ -135,7 +135,7 @@ module.exports.writeToCacheAsync = async (cacheKey, cacheValue) => {
  * @param {*} original see the comments below for the required schema for each request type
  * @returns cache key or null if invalid type
  */
-module.exports.createCacheKey = async (requestType, original) => {
+module.exports.createCacheKey = (requestType, original) => {
   if (requestType === REQUEST_TYPES.LatenciesFromOneRegionToMultiRegionCandidates) {
     // expect 'original' to be in format {src: "aws@us-west-2", dst: ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]} and all regions have been validated
     return `${original.src.toString().toLowerCase()}+${original.dst.sort().toString().toLowerCase()}`;
