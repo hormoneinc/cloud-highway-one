@@ -80,14 +80,14 @@ module.exports.validateCandidates = (dstCandidateArray) => {
  * However, since we save cache values to database as well, we don't want to involve this kind of caching when the request is small:
  * a get request of a single item does not worth caching it, as writing to cache actaully generate one more operation;
  *
- * @param {*} key cache key
- * @returns cached value or null
+ * @param {*} cacheKey cache key string
+ * @returns cached value string or null
  */
-module.exports.checkCacheAsync = async (key) => {
+module.exports.checkCacheAsync = async (cacheKey) => {
   const params = {
     TableName: 'CloudHighwayOneCache',
     Key: {
-      key
+      key: cacheKey.toString()
     }
   };
 
@@ -108,15 +108,15 @@ module.exports.checkCacheAsync = async (key) => {
 /**
  * Write to cache database
  *
- * @param {*} key cache key
- * @param {*} value value to cache
+ * @param {*} cacheKey cache key string
+ * @param {*} cacheValue value string to becached
  */
-module.exports.writeToCacheAsync = async (key, value) => {
+module.exports.writeToCacheAsync = async (cacheKey, cacheValue) => {
   const params = {
     TableName: 'CloudHighwayOneCache',
     Item: {
-      key,
-      value,
+      key: cacheKey.toString(),
+      value: cacheValue.toString(),
       ttl: Math.floor(Date.now() / 1000) + CACHE_TTL_IN_MINUTES * 60
     }
   };
@@ -138,7 +138,7 @@ module.exports.writeToCacheAsync = async (key, value) => {
 module.exports.createCacheKey = async (requestType, original) => {
   if (requestType === REQUEST_TYPES.LatenciesFromOneRegionToMultiRegionCandidates) {
     // expect 'original' to be in format {src: "aws@us-west-2", dst: ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]} and all regions have been validated
-    return `${original.src}+${original.dst.sort()}`;
+    return `${original.src.toString().toLowerCase()}+${original.dst.sort().toString().toLowerCase()}`;
   }
   return null;
 };
