@@ -21,3 +21,7 @@ module.exports.regions = {
     'sa-east-1'
   ]
 };
+
+module.exports.MAX_DST_REGION_CANDIDATES = 100;
+
+module.exports.CACHE_TTL_IN_MINUTES = 15;

@@ -4,15 +4,21 @@ provider:
   name: aws
   region: us-west-2
   runtime: nodejs12.x
-  logs:
-    restApi: true
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
+        - dynamodb:BatchGetItem
       Resource: 'arn:aws:dynamodb:us-west-2:*:table/CloudHighwayOne'
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:BatchGetItem
+      Resource: 'arn:aws:dynamodb:us-west-2:*:table/CloudHighwayOneCache'
 
 functions:
   GetInterRegionalLatency:
@@ -21,6 +27,20 @@ functions:
     events:
       - http:
           path: getLatency
+          method: get
+          statusCodes:
+            200:
+              pattern: ''
+            400:
+              pattern: '.*"statusCode":400,.*'
+            500:
+              pattern: '.*"statusCode":500,.*'
+  GetBestDstRegionFromSrcRegion:
+    handler: api.getBestDestinationRegionFromSourceRegion
+    timeout: 10
+    events:
+      - http:
+          path: getBestDstRegion
           method: get
           statusCodes:
             200:
