@@ -41,7 +41,7 @@ module.exports.getAllData = async (event) => {
   const { acknowledgement } = event.queryStringParameters;
 
   if (
-    acknowledgement ===
+    acknowledgement !==
     'Yes_I_Understand_This_Operation_Is_Expensive_And_I_Should_Only_Make_The_Request_When_I_Really_Need_It'
   ) {
     return {
