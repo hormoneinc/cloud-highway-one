@@ -73,20 +73,21 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
           let regionOfMinPing = null;
 
           for (let i = 0; i < arrayOfObjects.length; i += 1) {
-            if (Number(arrayOfObjects[i].ping) < minPing) {
+            // filter out source region
+            if (arrayOfObjects[i].dstRegion !== srcRegionName && Number(arrayOfObjects[i].ping) < minPing) {
               minPing = Number(arrayOfObjects[i].ping);
               regionOfMinPing = arrayOfObjects[i].dstRegion;
             }
           }
 
-          console.log('cache hit');
+          console.log('logtag: 9381def7-3884-41ed-b884-8cba52d95f3c', 'cache hit');
           result = regionOfMinPing;
         } catch (error) {
           console.error('logtag: 2321e41c-a98e-4bed-838a-6504ebc01996', error);
           result = null;
         }
       } else {
-        console.log('cache miss');
+        console.log('logtag: fd085227-bf14-4c6a-aeb5-003d3a18ba07', 'cache miss');
       }
     }
   }
@@ -134,7 +135,11 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         let regionOfMinPing = null;
 
         for (let i = 0; i < response.Responses.CloudHighwayOne.length; i += 1) {
-          if (Number(response.Responses.CloudHighwayOne[i].ping) < minPing) {
+          // filter out source region
+          if (
+            response.Responses.CloudHighwayOne[i].dstRegion !== srcRegionName &&
+            Number(response.Responses.CloudHighwayOne[i].ping) < minPing
+          ) {
             minPing = Number(response.Responses.CloudHighwayOne[i].ping);
             regionOfMinPing = response.Responses.CloudHighwayOne[i].dstRegion;
           }
@@ -159,7 +164,6 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
     } else {
       // if no destination regions specified, check against all other regions except source region itself
       // query is a better choice in this case
-
       let minPing = Number.MAX_VALUE;
       let regionOfMinPing = null;
       let lastEvaluatedKey = null;
@@ -209,7 +213,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         if (response.Items) {
           responseItemsArray = responseItemsArray.concat(response.Items);
           for (let i = 0; i < response.Items.length; i += 1) {
-            // don't forget to filter out source region
+            // filter out source region
             if (response.Items[i].dstRegion !== srcRegionName && Number(response.Items[i].ping) < minPing) {
               minPing = Number(response.Items[i].ping);
               regionOfMinPing = response.Items[i].dstRegion;
