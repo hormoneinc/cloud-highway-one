@@ -64,3 +64,17 @@ functions:
               pattern: '.*"statusCode":400,.*'
             500:
               pattern: '.*"statusCode":500,.*'
+  GetAllData:
+    handler: api/getAllData.getAllData
+    timeout: 15
+    events:
+      - http:
+          path: getAllData
+          method: get
+          statusCodes:
+            200:
+              pattern: ''
+            400:
+              pattern: '.*"statusCode":400,.*'
+            500:
+              pattern: '.*"statusCode":500,.*'

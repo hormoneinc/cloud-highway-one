@@ -20,6 +20,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * Up to 100 destination region candidates can be specified. If no candidates specified, it will check against all other regions.
  *
  * Example query:
+ *
  * /getBestDstRegion?srcProvider=aws&srcRegion=us-west-2&dstCandidate=aws@us-west-1&dstCandidate=aws@ap-east-1&dstCandidate=aws@eu-central-1
  *
  * @param {*} event

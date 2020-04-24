@@ -18,10 +18,12 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * GET API to get the latencies against all regions from a source region
  *
  * Example query:
+ *
  * /getAllDstRegion?srcProvider=aws&srcRegion=us-west-2
  *
  * @param {*} event
  * @returns stringified JSON of region names and latencies (does not include the source region itself)
+ *
  * Example response:
  *
  * {
@@ -145,7 +147,7 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
             { dstRegion: 'aws@ap-east-1', ping: 125 },
             { dstRegion: 'aws@eu-central-1', ping: 200 }
           ]
-        */
+      */
       if (response.Items) {
         responseItemsArray = responseItemsArray.concat(response.Items);
         for (let i = 0; i < response.Items.length; i += 1) {

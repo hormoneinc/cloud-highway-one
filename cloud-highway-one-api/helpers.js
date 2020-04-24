@@ -140,6 +140,9 @@ module.exports.createCacheKey = (requestType, original) => {
     // expect 'original' to be in format {src: "aws@us-west-2", dst: ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]} and all regions have been validated
     return `${original.src.toString().toLowerCase()}+${original.dst.sort().toString().toLowerCase()}`;
   }
+  if (requestType === REQUEST_TYPES.AllData) {
+    return 'ALL_DATA';
+  }
   return null;
 };
 
