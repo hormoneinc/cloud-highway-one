@@ -43,13 +43,12 @@ function validateRegion(provider, region) {
  * @returns boolean
  */
 function validateCandidates(dstCandidateArray) {
-  if (dstCandidateArray.length > MAX_DST_REGION_CANDIDATES) {
-    return false;
-  }
-
   if (!dstCandidateArray) {
     // check against all regions
     return true;
+  }
+  if (dstCandidateArray.length > MAX_DST_REGION_CANDIDATES) {
+    return false;
   }
 
   try {
