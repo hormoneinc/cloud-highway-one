@@ -16,14 +16,14 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * /getAllData?acknowledgement=Yes_I_Understand_This_Operation_Is_Expensive_And_I_Should_Only_Make_The_Request_When_I_Really_Need_It
  *
  * @param {*} event
- * @returns stringified JSON of every possible permutations (including source region to itself) in random order.
+ * @returns a list of every possible permutations (including source region to itself) in random order.
  *
  * Example response:
  *
  * {
  *   data: [
- *     { srcRegion: 'aws@us-west-2', dstRegion: 'aws@ap-east-1', ping: 125 },
- *     { srcRegion: 'aws@eu-central-1', dstRegion: 'aws@eu-central-1', ping: 20 },
+ *     { srcProvider: 'aws', srcRegion: 'us-west-2', dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125 },
+ *     { srcProvider: 'aws', srcRegion: 'eu-central-1', dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 20 },
  *     ...
  *   ]
  * }
@@ -111,7 +111,15 @@ module.exports.getAllData = async (event) => {
 
   const result = JSON.stringify(
     {
-      data: responseItemsArray
+      data: responseItemsArray.map((x) => {
+        return {
+          srcProvider: x.srcRegion.split('@')[0],
+          srcRegion: x.srcRegion.split('@')[1],
+          dstProvider: x.dstRegion.split('@')[0],
+          dstRegion: x.dstRegion.split('@')[1],
+          ping: x.ping
+        };
+      })
     },
     null,
     2

@@ -22,14 +22,15 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * /getAllDstRegion?srcProvider=aws&srcRegion=us-west-2
  *
  * @param {*} event
- * @returns stringified JSON of region names and latencies (does not include the source region itself)
+ * @returns list of destination providers, region names and latencies (does not include the source region itself)
  *
  * Example response:
  *
  * {
  *   data: [
- *     { dst: 'aws@ap-east-1', ping: 125 },
- *     { dst: 'aws@eu-central-1', ping: 200 }
+ *     { dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125 },
+ *     { dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 200 },
+ *     ...
  *   ]
  * }
  *
@@ -84,7 +85,8 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
           // filter out source region
           if (arrayOfObjects[i].dstRegion !== srcRegionName) {
             resultArray.push({
-              dst: arrayOfObjects[i].dstRegion,
+              dstProvider: arrayOfObjects[i].dstRegion.split('@')[0],
+              dstRegion: arrayOfObjects[i].dstRegion.split('@')[1],
               ping: arrayOfObjects[i].ping
             });
           }
@@ -161,7 +163,8 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
           // filter out source region
           if (response.Items[i].dstRegion !== srcRegionName) {
             resultArray.push({
-              dst: response.Items[i].dstRegion,
+              dstProvider: response.Items[i].dstRegion.split('@')[0],
+              dstRegion: response.Items[i].dstRegion.split('@')[0],
               ping: response.Items[i].ping
             });
           }

@@ -24,7 +24,14 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * /getBestDstRegion?srcProvider=aws&srcRegion=us-west-2&dstCandidate=aws@us-west-1&dstCandidate=aws@ap-east-1&dstCandidate=aws@eu-central-1
  *
  * @param {*} event
- * @returns a region name with its provider. e.g. "aws@us-west-1"
+ * @returns provider, region name and latency.
+ *
+ * Example response:
+ *
+ * {
+ *   result: { dstProvider: 'aws', dstRegion: 'us-west-2', ping: 60 }
+ * }
+ *
  */
 module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   if (!event || !event.queryStringParameters) {
@@ -50,6 +57,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   let cacheKey;
   let cachedValue;
   let result;
+  let resultPing;
   let checkAgainstAll;
 
   // Read From Cache DB
@@ -90,9 +98,11 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
 
           console.log('logtag: 9381def7-3884-41ed-b884-8cba52d95f3c', 'cache hit');
           result = regionOfMinPing;
+          resultPing = minPing;
         } catch (error) {
           console.error('logtag: 2321e41c-a98e-4bed-838a-6504ebc01996', error);
           result = null;
+          resultPing = null;
         }
       } else {
         console.log('logtag: fd085227-bf14-4c6a-aeb5-003d3a18ba07', 'cache miss');
@@ -154,6 +164,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         }
 
         result = regionOfMinPing;
+        resultPing = minPing;
 
         if (result && dstCandidate.length > 5) {
           // if there is a valid result, save the **original database response** to cache,
@@ -231,6 +242,7 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
       } while (lastEvaluatedKey);
 
       result = regionOfMinPing;
+      resultPing = minPing;
 
       if (result) {
         try {
@@ -242,10 +254,22 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
     }
   }
 
+  const returnResult = JSON.stringify(
+    {
+      result: {
+        dstProvider: result.split('@')[0],
+        dstRegion: result.split('@')[1],
+        ping: resultPing
+      }
+    },
+    null,
+    2
+  );
+
   if (result) {
     return {
       statusCode: 200,
-      body: result
+      body: returnResult
     };
   }
   console.error('logtag: 3312da6e-262f-4e8a-8562-bedfc7332dce', 'no result');

@@ -14,7 +14,13 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * /getLatency?srcProvider=aws&srcRegion=us-west-2&dstProvider=aws&dstRegion=ap-east-1
  *
  * @param {*} event
- * @returns latency in ms
+ * @returns latency in milliseconds (keep the original accuracy)
+ *
+ * Example response:
+ *
+ * {
+ *   ping: 143.9680204
+ * }
  */
 module.exports.interRegionalLatency = async (event) => {
   if (!event || !event.queryStringParameters) {
@@ -64,6 +70,12 @@ module.exports.interRegionalLatency = async (event) => {
 
   return {
     statusCode: 200,
-    body: response.Item.ping
+    body: JSON.stringify(
+      {
+        ping: response.Item.ping
+      },
+      null,
+      2
+    )
   };
 };
