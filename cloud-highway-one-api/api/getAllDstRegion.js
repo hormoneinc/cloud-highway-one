@@ -36,6 +36,13 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  */
 
 module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
+  if (!event || !event.queryStringParameters) {
+    return {
+      statusCode: 400,
+      body: 'Bad Request'
+    };
+  }
+
   const { srcProvider } = event.queryStringParameters;
   const { srcRegion } = event.queryStringParameters;
 

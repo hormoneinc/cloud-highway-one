@@ -31,6 +31,13 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  */
 
 module.exports.getAllData = async (event) => {
+  if (!event || !event.queryStringParameters) {
+    return {
+      statusCode: 400,
+      body: 'Bad Request'
+    };
+  }
+
   const { acknowledgement } = event.queryStringParameters;
 
   if (

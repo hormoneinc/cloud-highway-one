@@ -27,6 +27,13 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * @returns a region name with its provider. e.g. "aws@us-west-1"
  */
 module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
+  if (!event || !event.queryStringParameters) {
+    return {
+      statusCode: 400,
+      body: 'Bad Request'
+    };
+  }
+
   const { srcProvider } = event.queryStringParameters;
   const { srcRegion } = event.queryStringParameters;
   let { dstCandidate } = event.multiValueQueryStringParameters; // ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]
