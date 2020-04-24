@@ -25,3 +25,7 @@ module.exports.regions = {
 module.exports.MAX_DST_REGION_CANDIDATES = 100;
 
 module.exports.CACHE_TTL_IN_MINUTES = 15;
+
+module.exports.REQUEST_TYPES = {
+  LatenciesFromOneRegionToMultiRegionCandidates: 'LatenciesFromOneRegionToMultiRegionCandidates'
+};
