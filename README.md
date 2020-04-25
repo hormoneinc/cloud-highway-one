@@ -22,10 +22,15 @@ As we deploy cloud infrastructures at a global scale, we often need to understan
 - **How much are the pings/latencies against all other regions from a specific source region?**
 
   e.g.
+
   AWS Oregon (us-west-2) <=> AWS Hong Kong (ap-east-1)
+
   AWS Oregon (us-west-2) <=> AWS N. California (us-west-1)
+
   AWS Oregon (us-west-2) <=> AWS Hong Kong (eu-central-1)
+
   ...
+
   ......
 
 - **I need to know all pings/latencies among all regions! (maybe for research purpose)**
@@ -34,16 +39,20 @@ As we deploy cloud infrastructures at a global scale, we often need to understan
 
 ## How can I get the data?
 
-- You can deploy this entire service in your own infrastructure and modify the code to store/use data in the way as you wish; or,
-- You can use the public API endpoints we provided for **free**! (with limitations on request rates and request counts to prevent from abuse); or,
-- You can pay a small amount of fee to use the public API endpoints with higher request rates and higher request counts; or,
-- You can pay (still) a small amount of fee to use the public API endpoints unlimited.
+- You can modify the code to store/use data in the way as you wish and deploy to your own infrastructures; or,
+- You can use the public API endpoints we provided for **free** (with limitations on request rates and request counts to prevent from abuse); or,
+- You can pay a small amount of fee to use the public API endpoints with higher limits; or,
+- You can pay higher (but still small) fee to use the public API endpoints unlimited.
 
-If you are interested in using the public API endpoints, please go to [our page at RapidAPI](https://rapidapi.com/hormone-hormone-default/api/cloud-highway-one)
+### If you are interested in using the public API endpoints
 
-RapidAPI.com is an API marketplace; we are not associated with them in any way.
+Please go to [our page at RapidAPI](https://rapidapi.com/hormone-hormone-default/api/cloud-highway-one) and follow the instructions to register.
 
-The user interface of RapidAPI.com is a little bit counterintuitive to use (at least for me), you might spend some time to get familiar with it (their service is pretty good though).
+RapidAPI.com is a third-party API marketplace; we are not associated with them in any ways.
+
+The user interface of RapidAPI.com is a little bit counterintuitive to use (at least for me), you might need some time to get familiar with it (their service is pretty good though).
+
+We suggest that you use our [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as your API Documentation Reference, as RapidAPI's website is somewhat confusing.
 
 ## Why are there limitations for using your API if it is open source?
 
@@ -52,6 +61,8 @@ Our API backend and database are hosted at AWS, so each request you make will in
 ## API Usage Documentation
 
 **If you are using our public API endpoints at RapidAPI.com, you also need to include a `x-rapidapi-key` to the request header. Visit [our page at RapidAPI](https://rapidapi.com/hormone-hormone-default/api/cloud-highway-one) and follow their instructions. Use the documentation in [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as the single source of truth if there are any discrepancies between the documentations**
+
+---
 
 ### GET Method: get the latency from a source region to a destination region
 
@@ -70,11 +81,17 @@ The latency has "directions", aka, switching source and destination region will 
 
 To get latency from `AWS us-west-2` region to `AWS ap-east-1` region:
 
-`/getLatency?srcProvider=aws&srcRegion=us-west-2&dstProvider=aws&dstRegion=ap-east-1`
+```
+/getLatency?srcProvider=aws&srcRegion=us-west-2&dstProvider=aws&dstRegion=ap-east-1
+```
 
 #### Example Response (JSON format, latency in milliseconds):
 
-`{ ping: 143.9680204 }`
+```json
+{ "ping": 143.9680204 }
+```
+
+---
 
 ### GET Method: get the region with the lowest latency from a source region.
 
@@ -102,11 +119,19 @@ Put one destination candidate in each `dstCandidate` query key.
 
 To check which of the three candidate destination regions `AWS us-west-1`, `AWS ap-east-1` and `AWS eu-central-1` has the lowest latency from source region `AWS us-west-2`:
 
-`/getBestDstRegion?srcProvider=aws&srcRegion=us-west-2&dstCandidate=aws@us-west-1&dstCandidate=aws@ap-east-1&dstCandidate=aws@eu-central-1`
+```
+/getBestDstRegion?srcProvider=aws&srcRegion=us-west-2&dstCandidate=aws@us-west-1&dstCandidate=aws@ap-east-1&dstCandidate=aws@eu-central-1
+```
 
 #### Example Response (JSON format, latency in milliseconds):
 
-`{ result: { dstProvider: 'aws', dstRegion: 'us-west-2', ping: 60.0498 } }`
+```json
+{
+  "result": { "dstProvider": "aws", "dstRegion": "us-west-2", "ping": 60.0498 }
+}
+```
+
+---
 
 ### GET Method: get the latencies against all supported regions from a source region
 
@@ -121,11 +146,13 @@ Required parameters:
 
 To get latencies from `AWS us-west-2` region to all supported regions:
 
-`/getAllDstRegion?srcProvider=aws&srcRegion=us-west-2`
+```
+/getAllDstRegion?srcProvider=aws&srcRegion=us-west-2
+```
 
 #### Example Response (JSON format, latency in milliseconds):
 
-```
+```json
   {
     data: [
       { dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.5481 },
@@ -134,6 +161,8 @@ To get latencies from `AWS us-west-2` region to all supported regions:
     ]
   }
 ```
+
+---
 
 ### GET Method: get the **entire** dataset (all possible permutations of latencies from each region to another including itself, in random order)
 
@@ -147,11 +176,13 @@ Required parameter:
 
 To get a complete latency dataset from each supported region to all regions (including itself):
 
-`/getAllData?acknowledgement=Yes_I_Understand_This_Operation_Is_Expensive_And_I_Should_Only_Make_The_Request_When_I_Really_Need_It`
+```
+/getAllData?acknowledgement=Yes_I_Understand_This_Operation_Is_Expensive_And_I_Should_Only_Make_The_Request_When_I_Really_Need_It
+```
 
 #### Example Response (**a large JSON**, latency in milliseconds):
 
-```
+```json
  {
     data: [
       { srcProvider: 'aws', srcRegion: 'us-west-2', dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.74213 },
@@ -165,7 +196,7 @@ To get a complete latency dataset from each supported region to all regions (inc
 
 All latency data is updated **every 30 minutes**.
 
-We may shorten the update interval (e.g. every 15 minutes, 10 minutes, 5 minutes or even shorter) in the future but we won't make it any longer, so you can rest assured that your data is always fresh.
+We may shorten the update interval (maybe to every 15 minutes, 10 minutes, 5 minutes or even shorter) in the future but we won't make it any longer, so you can rest assured that your data is always fresh.
 
 ## Data Accuracy:
 
@@ -211,9 +242,11 @@ We are using the exact same API endpoints as you do.
 
 ## Open Source and Contributions
 
-This project is completely open source and in active development, new features and new cloud providers/regions are coming soon!
+This project is completely open source and in active development.
 
-Any kind of contributions are welcome and appreciated!
+New features and newly supported cloud providers/regions are coming soon!
+
+Any kind of contributions are always welcome and appreciated!
 
 If you do not want to use the public API we provided, you can easily deploy everything in your own infrastructure.
 
@@ -226,4 +259,6 @@ by [Hormone Inc.](https://hormone.xyz/)
 
 ## Attribution
 
-The project logo is inspired and modified from the [signs](https://en.wikipedia.org/wiki/Interstate_90#/media/File:I-90.svg) of [Interstate Highways in the United States](https://en.wikipedia.org/wiki/Interstate_Highway_System). The project logo is [copyleft](https://www.gnu.org/licenses/copyleft.en.html).
+The project logo is inspired and modified from the [signs](https://en.wikipedia.org/wiki/Interstate_90#/media/File:I-90.svg) of [Interstate Highways in the United States](https://en.wikipedia.org/wiki/Interstate_Highway_System).
+
+The project logo is [copyleft](https://www.gnu.org/licenses/copyleft.en.html).
