@@ -20,8 +20,13 @@ provider:
         - dynamodb:PutItem
         - dynamodb:BatchGetItem
       Resource: 'arn:aws:dynamodb:us-west-2:*:table/CloudHighwayOneCache'
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    RAPID_API_SECRET_KEY: ${env:RAPID_API_SECRET_KEY} # secret key from https://rapidapi.com/
 
 functions:
+  authorizerFunc:
+    handler: auth.authorize
   GetInterRegionalLatency:
     handler: api/getLatency.interRegionalLatency
     timeout: 10
@@ -29,6 +34,7 @@ functions:
       - http:
           path: getLatency
           method: get
+          authorizer: authorizerFunc
           statusCodes:
             200:
               pattern: ''
@@ -43,6 +49,7 @@ functions:
       - http:
           path: getBestDstRegion
           method: get
+          authorizer: authorizerFunc
           statusCodes:
             200:
               pattern: ''
@@ -57,6 +64,7 @@ functions:
       - http:
           path: getAllDstRegion
           method: get
+          authorizer: authorizerFunc
           statusCodes:
             200:
               pattern: ''
@@ -71,6 +79,7 @@ functions:
       - http:
           path: getAllData
           method: get
+          authorizer: authorizerFunc
           statusCodes:
             200:
               pattern: ''
