@@ -87,7 +87,7 @@ To get latency from `AWS us-west-2` region to `AWS ap-east-1` region:
 
 #### Example Response (JSON format, latency in milliseconds):
 
-```json
+```
 { "ping": 143.9680204 }
 ```
 
@@ -125,7 +125,7 @@ To check which of the three candidate destination regions `AWS us-west-1`, `AWS 
 
 #### Example Response (JSON format, latency in milliseconds):
 
-```json
+```
 {
   "result": { "dstProvider": "aws", "dstRegion": "us-west-2", "ping": 60.0498 }
 }
@@ -152,7 +152,7 @@ To get latencies from `AWS us-west-2` region to all supported regions:
 
 #### Example Response (JSON format, latency in milliseconds):
 
-```json
+```
   {
     data: [
       { dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.5481 },
@@ -182,7 +182,7 @@ To get a complete latency dataset from each supported region to all regions (inc
 
 #### Example Response (**a large JSON**, latency in milliseconds):
 
-```json
+```
  {
     data: [
       { srcProvider: 'aws', srcRegion: 'us-west-2', dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.74213 },
