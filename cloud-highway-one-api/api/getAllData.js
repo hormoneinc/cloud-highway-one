@@ -9,7 +9,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * GET API to get all data in random order (all possible permutations of latencies from each region to another including itself)
+ * GET method to get all data in random order (all possible permutations of latencies from each region to another including itself)
  *
  * Example query: (please note that the "acknowledgement" text has to match exactly)
  *

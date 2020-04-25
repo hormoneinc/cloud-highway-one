@@ -8,7 +8,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * GET API to get the latency from source region to destination region
+ * GET method to get the latency from source region to destination region
  *
  * The latency has "directions", aka, switching source and destination region will get a different result (although they are super close)
  *

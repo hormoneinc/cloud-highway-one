@@ -15,7 +15,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * GET API to get the latencies against all supported regions of all providers from a source region
+ * GET method to get the latencies against all supported regions of all providers from a source region
  *
  * Example query:
  *

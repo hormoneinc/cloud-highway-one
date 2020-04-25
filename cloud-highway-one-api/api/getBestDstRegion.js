@@ -16,7 +16,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * GET API to get the region with the lowest latency from a source region
+ * GET method to get the region with the lowest latency from a source region
  *
  * Up to 100 destination region candidates can be specified. If no candidates specified, it will check against all other regions.
  *
