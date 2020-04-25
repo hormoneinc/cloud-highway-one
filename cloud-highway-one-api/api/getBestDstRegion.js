@@ -37,7 +37,13 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   if (!event || !event.queryStringParameters) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -48,7 +54,13 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   if (!srcProvider || !srcRegion || !validateRegion(srcProvider, srcRegion) || !validateCandidates(dstCandidate)) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -136,7 +148,13 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         console.error('logtag: b1870162-b567-49ad-9862-3033b4e0f86e', error);
         return {
           statusCode: 500,
-          body: 'Internal Server Error'
+          body: JSON.stringify(
+            {
+              error: 'Internal Server Error'
+            },
+            null,
+            2
+          )
         };
       }
       /* Response format:
@@ -217,7 +235,13 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
           console.error('logtag: 38fcf762-a941-4334-8199-6bbe03f62e05', error);
           return {
             statusCode: 500,
-            body: 'Internal Server Error'
+            body: JSON.stringify(
+              {
+                error: 'Internal Server Error'
+              },
+              null,
+              2
+            )
           };
         }
 
@@ -275,6 +299,12 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   console.error('logtag: 3312da6e-262f-4e8a-8562-bedfc7332dce', 'no result');
   return {
     statusCode: 500,
-    body: 'Internal Server Error'
+    body: JSON.stringify(
+      {
+        error: 'Internal Server Error'
+      },
+      null,
+      2
+    )
   };
 };

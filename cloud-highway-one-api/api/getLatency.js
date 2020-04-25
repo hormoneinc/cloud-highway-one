@@ -26,7 +26,13 @@ module.exports.interRegionalLatency = async (event) => {
   if (!event || !event.queryStringParameters) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -45,7 +51,13 @@ module.exports.interRegionalLatency = async (event) => {
   ) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -64,7 +76,13 @@ module.exports.interRegionalLatency = async (event) => {
     console.error('logtag: b6a94240-902b-42e8-af04-66225f473742', error);
     return {
       statusCode: 500,
-      body: 'Internal Server Error'
+      body: JSON.stringify(
+        {
+          error: 'Internal Server Error'
+        },
+        null,
+        2
+      )
     };
   }
 

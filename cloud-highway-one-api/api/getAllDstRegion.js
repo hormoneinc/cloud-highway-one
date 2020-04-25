@@ -40,7 +40,13 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
   if (!event || !event.queryStringParameters) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -50,7 +56,13 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
   if (!srcProvider || !srcRegion || !validateRegion(srcProvider, srcRegion)) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -145,7 +157,13 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
         console.error('logtag: ff607da6-694f-448e-be23-01af1b0e0122', error);
         return {
           statusCode: 500,
-          body: 'Internal Server Error'
+          body: JSON.stringify(
+            {
+              error: 'Internal Server Error'
+            },
+            null,
+            2
+          )
         };
       }
 
@@ -198,6 +216,12 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
   console.error('logtag: 9ceff11d-e448-4474-87b9-247d78077331', 'no result');
   return {
     statusCode: 500,
-    body: 'Internal Server Error'
+    body: JSON.stringify(
+      {
+        error: 'Internal Server Error'
+      },
+      null,
+      2
+    )
   };
 };

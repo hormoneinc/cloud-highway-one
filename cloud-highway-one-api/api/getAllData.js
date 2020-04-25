@@ -34,7 +34,13 @@ module.exports.getAllData = async (event) => {
   if (!event || !event.queryStringParameters) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -46,7 +52,13 @@ module.exports.getAllData = async (event) => {
   ) {
     return {
       statusCode: 400,
-      body: 'Bad Request'
+      body: JSON.stringify(
+        {
+          error: 'Bad Request'
+        },
+        null,
+        2
+      )
     };
   }
 
@@ -93,7 +105,13 @@ module.exports.getAllData = async (event) => {
       console.error('logtag: 457bfe75-87a9-42fc-a77e-035b2446e04c', error);
       return {
         statusCode: 500,
-        body: 'Internal Server Error'
+        body: JSON.stringify(
+          {
+            error: 'Internal Server Error'
+          },
+          null,
+          2
+        )
       };
     }
 
@@ -142,6 +160,12 @@ module.exports.getAllData = async (event) => {
   console.error('logtag: 9ddcb74f-5172-4218-9969-a829a5cbcd6c', 'no result');
   return {
     statusCode: 500,
-    body: 'Internal Server Error'
+    body: JSON.stringify(
+      {
+        error: 'Internal Server Error'
+      },
+      null,
+      2
+    )
   };
 };
