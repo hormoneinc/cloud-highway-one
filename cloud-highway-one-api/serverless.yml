@@ -34,7 +34,8 @@ functions:
       - http:
           path: getLatency
           method: get
-          authorizer: authorizerFunc
+          authorizer:
+            name: authorizerFunc
             type: request
           statusCodes:
             200:
@@ -50,7 +51,8 @@ functions:
       - http:
           path: getBestDstRegion
           method: get
-          authorizer: authorizerFunc
+          authorizer:
+            name: authorizerFunc
             type: request
           statusCodes:
             200:
@@ -66,7 +68,8 @@ functions:
       - http:
           path: getAllDstRegion
           method: get
-          authorizer: authorizerFunc
+          authorizer:
+            name: authorizerFunc
             type: request
           statusCodes:
             200:
@@ -82,7 +85,8 @@ functions:
       - http:
           path: getAllData
           method: get
-          authorizer: authorizerFunc
+          authorizer:
+            name: authorizerFunc
             type: request
           statusCodes:
             200:
