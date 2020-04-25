@@ -20,10 +20,11 @@ const generateAllow = (principalId, resource) => {
 };
 
 module.exports.authorize = (event, context, callback) => {
+  console.log(event.headers['X-RapidAPI-Proxy-Secret']);
+  console.log(process.env.RAPID_API_SECRET_KEY);
   if (process.env.RAPID_API_SECRET_KEY === event.headers['X-RapidAPI-Proxy-Secret']) {
     callback(null, generateAllow('RapidAPI', event.methodArn));
   } else {
-    console.log(event.headers['X-RapidAPI-Proxy-Secret']);
     callback('Unauthorized');
   }
 };
