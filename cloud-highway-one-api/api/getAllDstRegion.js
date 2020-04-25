@@ -22,7 +22,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  * /getAllDstRegion?srcProvider=aws&srcRegion=us-west-2
  *
  * @param {*} event
- * @returns list of destination providers, region names and latencies (does not include the source region itself)
+ * @returns a list of destination providers, region names and latencies (does not include the source region itself)
  *
  * Example response:
  *
