@@ -37,6 +37,8 @@ functions:
           authorizer:
             name: authorizerFunc
             type: request
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.X-RapidAPI-Proxy-Secret
           statusCodes:
             200:
               pattern: ''
@@ -54,6 +56,8 @@ functions:
           authorizer:
             name: authorizerFunc
             type: request
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.X-RapidAPI-Proxy-Secret
           statusCodes:
             200:
               pattern: ''
@@ -71,6 +75,8 @@ functions:
           authorizer:
             name: authorizerFunc
             type: request
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.X-RapidAPI-Proxy-Secret
           statusCodes:
             200:
               pattern: ''
@@ -88,6 +94,8 @@ functions:
           authorizer:
             name: authorizerFunc
             type: request
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.X-RapidAPI-Proxy-Secret
           statusCodes:
             200:
               pattern: ''
