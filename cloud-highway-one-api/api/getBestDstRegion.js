@@ -17,19 +17,24 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 
 /**
  * GET API to get the region with the lowest latency from a source region
+ *
  * Up to 100 destination region candidates can be specified. If no candidates specified, it will check against all other regions.
+ *
+ * For each candidate, use `@` to join destination provider name and region name, e.g. `aws@us-west-1`.
+ *
+ * Put one destination candidate in each `dstCandidate` query key.
  *
  * Example query:
  *
  * /getBestDstRegion?srcProvider=aws&srcRegion=us-west-2&dstCandidate=aws@us-west-1&dstCandidate=aws@ap-east-1&dstCandidate=aws@eu-central-1
  *
  * @param {*} event
- * @returns provider, region name and latency.
+ * @returns provider, region name and latency. latency in milliseconds (keep the original accuracy)
  *
- * Example response:
+ * Example response (JSON):
  *
  * {
- *   result: { dstProvider: 'aws', dstRegion: 'us-west-2', ping: 60 }
+ *   result: { dstProvider: 'aws', dstRegion: 'us-west-2', ping: 60.0498 }
  * }
  *
  */

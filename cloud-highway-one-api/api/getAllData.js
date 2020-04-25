@@ -17,13 +17,14 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  *
  * @param {*} event
  * @returns a list of every possible permutations (including source region to itself) in random order.
+ * latency in milliseconds (keep the original accuracy)
  *
- * Example response:
+ * Example response (JSON):
  *
  * {
  *   data: [
- *     { srcProvider: 'aws', srcRegion: 'us-west-2', dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125 },
- *     { srcProvider: 'aws', srcRegion: 'eu-central-1', dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 20 },
+ *     { srcProvider: 'aws', srcRegion: 'us-west-2', dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.74213 },
+ *     { srcProvider: 'aws', srcRegion: 'eu-central-1', dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 20.00115 },
  *     ...
  *   ]
  * }

@@ -15,7 +15,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * GET API to get the latencies against all regions from a source region
+ * GET API to get the latencies against all supported regions of all providers from a source region
  *
  * Example query:
  *
@@ -23,13 +23,14 @@ const docClient = new AWS.DynamoDB.DocumentClient({
  *
  * @param {*} event
  * @returns a list of destination providers, region names and latencies (does not include the source region itself)
+ * latency in milliseconds (keep the original accuracy)
  *
- * Example response:
+ * Example response (JSON):
  *
  * {
  *   data: [
- *     { dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125 },
- *     { dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 200 },
+ *     { dstProvider: 'aws', dstRegion: 'ap-east-1', ping: 125.5481 },
+ *     { dstProvider: 'aws', dstRegion: 'eu-central-1', ping: 200.00018 },
  *     ...
  *   ]
  * }

@@ -10,13 +10,15 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 /**
  * GET API to get the latency from source region to destination region
  *
+ * The latency has "directions", aka, switching source and destination region will get a different result (although they are super close)
+ *
  * Example query:
  * /getLatency?srcProvider=aws&srcRegion=us-west-2&dstProvider=aws&dstRegion=ap-east-1
  *
  * @param {*} event
  * @returns latency in milliseconds (keep the original accuracy)
  *
- * Example response:
+ * Example response (JSON):
  *
  * {
  *   ping: 143.9680204
