@@ -7,7 +7,7 @@
 
 Inter-regional Latency/Ping for AWS (Azure, GCP coming soon)
 
-<img src="https://cdn.hormone.xyz/images/CloudHighwayOneLogo.svg" width="100%" height="200">
+<a href="#"><img src="https://cdn.hormone.xyz/images/CloudHighwayOneLogo.svg" width="100%" height="200"></a>
 
 ## What does this do?
 
