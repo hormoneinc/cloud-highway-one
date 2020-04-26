@@ -5,6 +5,8 @@
 ![API Deployment (DEV)](<https://github.com/hormoneinc/cloud-highway-one/workflows/API%20Deployment%20(DEV)/badge.svg?branch=deploy%2Fapi%2Fdev>)
 ![API Deployment (PROD)](<https://github.com/hormoneinc/cloud-highway-one/workflows/API%20Deployment%20(PROD)/badge.svg?branch=deploy%2Fapi%2Fprod>)
 
+Inter-regional Latency/Ping for AWS (Azure, GCP coming soon)
+
 ![Cloud Highway One Logo](https://cdn.hormone.xyz/images/CloudHighwayOne300x300.png)
 
 ## What does this do?
@@ -46,13 +48,13 @@ As we deploy cloud infrastructures at a global scale, we often need to understan
 
 ### If you are interested in using the public API endpoints
 
-Please go to [our page at RapidAPI](https://rapidapi.com/hormone-hormone-default/api/cloud-highway-one) and follow the instructions to register.
+Please go to [our page at RapidAPI](https://rapidapi.com/hormone-hormone-inc/api/cloud-highway-one) and follow the instructions to register.
 
 RapidAPI.com is a third-party API marketplace; we are not associated with them in any ways.
 
 The user interface of RapidAPI.com is a little bit counterintuitive to use (at least for me), you might need some time to get familiar with it (their service is pretty good though).
 
-We suggest that you use our [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as your API Documentation Reference, as RapidAPI's website is somewhat confusing.
+We suggest that you use our [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as your API Documentation Reference, as RapidAPI's website is super confusing and not user-friendly.
 
 ## Why are there limitations for using your API if it is open source?
 
@@ -60,7 +62,7 @@ Our API backend and database are hosted at AWS, so each request you make will in
 
 ## API Usage Documentation
 
-**If you are using our public API endpoints at RapidAPI.com, you also need to include a `x-rapidapi-key` to the request header. Visit [our page at RapidAPI](https://rapidapi.com/hormone-hormone-default/api/cloud-highway-one) and follow their instructions. Use the documentation in [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as the single source of truth if there are any discrepancies between the documentations**
+**If you are using our public API endpoints at RapidAPI.com, you also need to include a `x-rapidapi-key` to the request header. Visit [our page at RapidAPI](https://rapidapi.com/hormone-hormone-inc/api/cloud-highway-one) and follow their instructions. Use the documentation in [GitHub project page](https://github.com/hormoneinc/cloud-highway-one) as the single source of truth if there are any discrepancies between the documentations**
 
 ---
 
@@ -259,6 +261,6 @@ by [Hormone Inc.](https://hormone.xyz/)
 
 ## Attribution
 
-The project logo is inspired and modified from the [signs](https://en.wikipedia.org/wiki/Interstate_90#/media/File:I-90.svg) of [Interstate Highways in the United States](https://en.wikipedia.org/wiki/Interstate_Highway_System).
+The project logo is inspired and derived from the [signs](https://en.wikipedia.org/wiki/Interstate_90#/media/File:I-90.svg) of [Interstate Highways in the United States](https://en.wikipedia.org/wiki/Interstate_Highway_System).
 
 The project logo is [copyleft](https://www.gnu.org/licenses/copyleft.en.html).
