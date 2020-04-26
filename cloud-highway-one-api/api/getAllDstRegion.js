@@ -183,7 +183,7 @@ module.exports.getAllInterRegionalLatenciesFromSourceRegion = async (event) => {
           if (response.Items[i].dstRegion !== srcRegionName) {
             resultArray.push({
               dstProvider: response.Items[i].dstRegion.split('@')[0],
-              dstRegion: response.Items[i].dstRegion.split('@')[0],
+              dstRegion: response.Items[i].dstRegion.split('@')[1],
               ping: response.Items[i].ping
             });
           }
