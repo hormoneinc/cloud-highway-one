@@ -55,7 +55,13 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
   const { srcProvider } = event.queryStringParameters;
   const { srcRegion } = event.queryStringParameters;
   let { dstCandidate } = event.multiValueQueryStringParameters; // ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]
-
+  if (!dstCandidate) {
+    // if there is only one candidate, we still do the check to get the ping although the request is pointless
+    const candidateFromSingleQueryParameter = event.queryStringParameters.dstCandidate;
+    if (candidateFromSingleQueryParameter) {
+      dstCandidate = [candidateFromSingleQueryParameter];
+    }
+  }
   if (!srcProvider || !srcRegion || !validateRegion(srcProvider, srcRegion) || !validateCandidates(dstCandidate)) {
     return {
       statusCode: 400,
@@ -176,11 +182,8 @@ module.exports.getBestDestinationRegionFromSourceRegion = async (event) => {
         let regionOfMinPing = null;
 
         for (let i = 0; i < response.Responses.CloudHighwayOne.length; i += 1) {
-          // filter out source region
-          if (
-            response.Responses.CloudHighwayOne[i].dstRegion !== srcRegionName &&
-            Number(response.Responses.CloudHighwayOne[i].ping) < minPing
-          ) {
+          // source region should not be filtered out from results if it is explicitly set in dstCandidate
+          if (Number(response.Responses.CloudHighwayOne[i].ping) < minPing) {
             minPing = Number(response.Responses.CloudHighwayOne[i].ping);
             regionOfMinPing = response.Responses.CloudHighwayOne[i].dstRegion;
           }
