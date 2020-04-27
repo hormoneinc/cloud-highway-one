@@ -2,7 +2,7 @@ name: API Deployment (DEV)
 
 on:
   push:
-    branches: [deploy/api/dev]
+    branches: [deploy/api/dev/*]
 
 jobs:
   deploy:
