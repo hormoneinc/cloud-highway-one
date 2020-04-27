@@ -8,7 +8,7 @@ const docClient = new AWS.DynamoDB.DocumentClient({
 });
 
 /**
- * Validate whether a string is a valid provider name
+ * Check whether a string is a valid provider name
  *
  * @param {*} provider string. e.g. "aws"
  * @returns boolean
@@ -20,7 +20,7 @@ const validateProvider = (provider) => {
 module.exports.validateProvider = validateProvider;
 
 /**
- * Validate whether provider and region is a valid combination
+ * Check whether provider and region is a valid combination
  *
  * @param {*} provider string. e.g. "aws"
  * @param {*} region string. e.g. "us-west-2"
@@ -36,7 +36,26 @@ const validateRegion = (provider, region) => {
 module.exports.validateRegion = validateRegion;
 
 /**
- * Validate whether an array of destination region candidates are valid
+ * Validate a single destination region candidate
+ *
+ * @param {*} candidate e.g. "aws@us-west-1"
+ * @returns boolean
+ */
+const validateCandidate = (candidate) => {
+  try {
+    const arraySplittedFromString = candidate.split('@');
+    if (!validateRegion(arraySplittedFromString[0], arraySplittedFromString[1])) {
+      throw new Error('Bad Request');
+    }
+  } catch (error) {
+    return false;
+  }
+  return true;
+};
+module.exports.validateCandidate = validateCandidate;
+
+/**
+ * Validate an array of destination region candidates
  *
  * @param {*} dstCandidateArray e.g. ["aws@us-west-1","aws@ap-east-1","aws@eu-central-1"]
  * @returns boolean
@@ -52,8 +71,7 @@ module.exports.validateCandidates = (dstCandidateArray) => {
 
   try {
     dstCandidateArray.forEach((x) => {
-      const arraySplittedFromString = x.split('@');
-      if (!validateRegion(arraySplittedFromString[0], arraySplittedFromString[1])) {
+      if (!validateCandidate(x)) {
         throw new Error('Bad Request');
       }
     });
