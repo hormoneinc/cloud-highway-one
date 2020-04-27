@@ -2,7 +2,6 @@
 
 ![Lint](https://github.com/hormoneinc/cloud-highway-one/workflows/Lint/badge.svg)
 ![Deployment](https://github.com/hormoneinc/cloud-highway-one/workflows/Deployment/badge.svg?branch=deploy%2Fping)
-![API Deployment (DEV)](<https://github.com/hormoneinc/cloud-highway-one/workflows/API%20Deployment%20(DEV)/badge.svg?branch=deploy%2Fapi%2Fdev>)
 ![API Deployment (PROD)](<https://github.com/hormoneinc/cloud-highway-one/workflows/API%20Deployment%20(PROD)/badge.svg?branch=deploy%2Fapi%2Fprod>)
 
 Inter-regional Latency/Ping for AWS (Azure, GCP coming soon)
